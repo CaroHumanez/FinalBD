@@ -14,10 +14,10 @@
 <body>
 <div class="container mt-5">
 
-    <h1>Trabajo final BD1 - (Sistema de Gestión de Artistas y Conciertos “13 Red Records”
-    )</h1>
+    <h1>Trabajo final BD1 - Sistema de Gestión de Artistas y Conciertos “13 Red Records”
+    </h1>
 
-    <div class="informacion">
+    <div class="Informacion">
         <ul>
             <li><b>Materia:</b> Bases de Datos I</li>
             <li><b>Profesor:</b> Francisco Javier Moreno Arboleda</li>
@@ -38,7 +38,7 @@
     <div class="modelo">
         <h2>Modelo E-R (Lo pueden eliminar o poner su modelo análogo)</h2>
         <p></p>
-        <img src="modelo.png">
+        <img src="modelo_analogo.png">
     </div>
 
     <div class="enlaces">

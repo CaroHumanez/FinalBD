@@ -7,14 +7,14 @@ require('../config/conexion.php');
 $nitEliminar = $_POST["nitEliminar"];
 
 // Query SQL a la BD
-$query = "DELETE FROM empresa WHERE nit = '$nitEliminar'";
+$query = "DELETE FROM album WHERE nit = '$nitEliminar'";
 
 // Ejecutar consulta
 $result = mysqli_query($conn, $query) or die(mysqli_error($conn));
 
 if($result): 
     // Si fue exitosa, redirigirse de nuevo a la página de la entidad
-    header ("Location: empresa.php");
+    header ("Location: album.php");
 else:
     echo "Ha ocurrido un error al eliminar este registro";
 endif;
