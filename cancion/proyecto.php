@@ -3,7 +3,7 @@ include "../includes/header.php";
 ?>
 
 <!-- TÍTULO. Cambiarlo, pero dejar especificada la analogía -->
-<h1 class="mt-3">Entidad análoga a PROYECTO (NOMBRE)</h1>
+<h1 class="mt-3">Entidad análoga a REPARACIÓN (CANCIÓN)</h1>
 
 <!-- FORMULARIO. Cambiar los campos de acuerdo a su trabajo -->
 <div class="formulario p-4 m-3 border rounded-3">
@@ -16,56 +16,21 @@ include "../includes/header.php";
         </div>
 
         <div class="mb-3">
-            <label for="fechacreacion" class="form-label">Fecha de creación</label>
-            <input type="date" class="form-control" id="fechacreacion" name="fechacreacion" required>
+            <label for="titulo" class="form-label">Título</label>
+            <input type="text" class="form-control" id="titulo" name="titulo" required>
         </div>
 
+        <!-- Consultar la lista de albumes y desplegarlos -->
         <div class="mb-3">
-            <label for="valor" class="form-label">Valor</label>
-            <input type="number" class="form-control" id="valor" name="valor" required>
-        </div>
-        
-        <!-- Consultar la lista de clientes y desplegarlos -->
-        <div class="mb-3">
-            <label for="cliente" class="form-label">Cliente</label>
-            <select name="cliente" id="cliente" class="form-select">
+            <label for="album" class="form-label">Album</label>
+            <select name="album" id="album" class="form-select">
                 
                 <!-- Option por defecto -->
                 <option value="" selected disabled hidden></option>
 
                 <?php
                 // Importar el código del otro archivo
-                require("../cliente/cliente_select.php");
-                
-                // Verificar si llegan datos
-                if($resultadoCliente):
-                    
-                    // Iterar sobre los registros que llegaron
-                    foreach ($resultadoCliente as $fila):
-                ?>
-
-                <!-- Opción que se genera -->
-                <option value="<?= $fila["cedula"]; ?>"><?= $fila["nombre"]; ?> - C.C. <?= $fila["cedula"]; ?></option>
-
-                <?php
-                        // Cerrar los estructuras de control
-                    endforeach;
-                endif;
-                ?>
-            </select>
-        </div>
-
-        <!-- Consultar la lista de empresas y desplegarlos -->
-        <div class="mb-3">
-            <label for="empresa" class="form-label">Empresa</label>
-            <select name="empresa" id="empresa" class="form-select">
-                
-                <!-- Option por defecto -->
-                <option value="" selected disabled hidden></option>
-
-                <?php
-                // Importar el código del otro archivo
-                require("../empresa/empresa_select.php");
+                require("../album/empresa_select.php");
                 
                 // Verificar si llegan datos
                 if($resultadoEmpresa):
@@ -75,7 +40,47 @@ include "../includes/header.php";
                 ?>
 
                 <!-- Opción que se genera -->
-                <option value="<?= $fila["nit"]; ?>"><?= $fila["nombre"]; ?> - NIT: <?= $fila["nit"]; ?></option>
+                <option value="<?= $fila["CODIGO"]; ?>"><?= $fila["CODIGO"]; ?> - <?= $fila["TITULO"]; ?></option>
+
+                <?php
+                        // Cerrar los estructuras de control
+                    endforeach;
+                endif;
+                ?>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="fechalanzamiento" class="form-label">Fecha de lanzamiento</label>
+            <input type="date" class="form-control" id="fechalanzamiento" name="fechalanzamiento" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="duracion" class="form-label">Duración</label>
+            <input type="number" class="form-control" id="duracion" name="duracion" required>
+        </div>
+
+        <!-- Consultar la lista de empresas y desplegarlos -->
+        <div class="mb-3">
+            <label for="inspiracion" class="form-label">Inspiración</label>
+            <select name="inspiracion" id="inspiracion" class="form-select">
+                
+                <!-- Option por defecto -->
+                <option value="131313" selected disabled hidden></option>
+
+                <?php
+                // Importar el código del otro archivo
+                require("../cancion/proyecto_select.php");
+                
+                // Verificar si llegan datos
+                if($resultadoProyecto):
+                    
+                    // Iterar sobre los registros que llegaron
+                    foreach ($resultadoProyecto as $fila):
+                ?>
+
+                <!-- Opción que se genera -->
+                <option value="<?= $fila["CODIGO"]; ?>"><?= $fila["CODIGO"]; ?> - <?= $fila["TITULO"]; ?></option>
 
                 <?php
                         // Cerrar los estructuras de control
@@ -108,10 +113,11 @@ if($resultadoProyecto and $resultadoProyecto->num_rows > 0):
         <thead class="table-dark">
             <tr>
                 <th scope="col" class="text-center">Código</th>
-                <th scope="col" class="text-center">Fecha de creación</th>
-                <th scope="col" class="text-center">Valor</th>
-                <th scope="col" class="text-center">Cliente</th>
-                <th scope="col" class="text-center">Empresa</th>
+                <th scope="col" class="text-center">Titulo</th>
+                <th scope="col" class="text-center">Album</th>
+                <th scope="col" class="text-center">Fecha de lanzamiento</th>
+                <th scope="col" class="text-center">Duracion</th>
+                <th scope="col" class="text-center">Inspiracion</th>
                 <th scope="col" class="text-center">Acciones</th>
             </tr>
         </thead>
@@ -126,16 +132,17 @@ if($resultadoProyecto and $resultadoProyecto->num_rows > 0):
             <!-- Fila que se generará -->
             <tr>
                 <!-- Cada una de las columnas, con su valor correspondiente -->
-                <td class="text-center"><?= $fila["codigo"]; ?></td>
-                <td class="text-center"><?= $fila["fechacreacion"]; ?></td>
-                <td class="text-center">$<?= $fila["valor"]; ?></td>
-                <td class="text-center">C.C. <?= $fila["cliente"]; ?></td>
-                <td class="text-center">NIT: <?= $fila["empresa"]; ?></td>
+                <td class="text-center"><?= $fila["CODIGO"]; ?></td>
+                <td class="text-center"><?= $fila["TITULO"]; ?></td>
+                <td class="text-center"><?= $fila["CODIGO_ALBUM"]; ?></td>
+                <td class="text-center"><?= $fila["FECHA_LANZAMIENTO"]; ?></td>
+                <td class="text-center"><?= $fila["DURACION"]; ?> minutos</td>
+                <td class="text-center"><?= $fila["CODIGO_INSPIRACION"]; ?></td>
                 
                 <!-- Botón de eliminar. Debe de incluir la CP de la entidad para identificarla -->
                 <td class="text-center">
                     <form action="proyecto_delete.php" method="post">
-                        <input hidden type="text" name="codigoEliminar" value="<?= $fila["codigo"]; ?>">
+                        <input hidden type="text" name="codigoEliminar" value="<?= $fila["CODIGO"]; ?>">
                         <button type="submit" class="btn btn-danger">Eliminar</button>
                     </form>
                 </td>
