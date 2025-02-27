@@ -8,7 +8,7 @@ include "../includes/header.php";
 <!-- FORMULARIO. Cambiar los campos de acuerdo a su trabajo -->
 <div class="formulario p-4 m-3 border rounded-3">
 
-    <form action="cliente_insert.php" method="post" class="form-group">
+    <form action="artista_insert.php" method="post" class="form-group">
 
         <div class="mb-3">
             <label for="codigo" class="form-label">Codigo</label>
@@ -29,8 +29,18 @@ include "../includes/header.php";
             <label for="tipo" class="form-label">Tipo</label>
             <select class="form-control" id="tipo" name="tipo" required>
                 <option value="Solista" selected>Solista</option>
-                <option value="Banda" >Banda</option>
+                <option value="Grupo" >Grupo</option>
             </select>
+
+        <div class="mb-3">
+            <label for="genero" class="form-label">Nombre Real <strong> (Uso exclusivo Solista)</strong></label>
+            <input type="text" class="form-control" id="nombre_oficial" name="nombre_oficial">
+        </div>
+        
+        <div class="mb-3">
+            <label for="genero" class="form-label">Numero Integrantes <strong>(Uso exclusivo Banda)</strong> </label>
+            <input type="number" class="form-control" id="numero_integrantes" name="numero_integrantes">
+        </div>
 
         </div>
 
@@ -42,10 +52,10 @@ include "../includes/header.php";
 
 <?php
 // Importar el código del otro archivo
-require("cliente_select.php");
+require("artista_select.php");
 
 // Verificar si llegan datos
-if($resultadoCliente and $resultadoCliente->num_rows > 0):
+if($resultadoArtista and $resultadoArtista->num_rows > 0):
 ?>
 
 <!-- MOSTRAR LA TABLA. Cambiar las cabeceras -->
@@ -56,9 +66,12 @@ if($resultadoCliente and $resultadoCliente->num_rows > 0):
         <!-- Títulos de la tabla, cambiarlos -->
         <thead class="table-dark">
             <tr>
-                <th scope="col" class="text-center">Cédula</th>
+            <th scope="col" class="text-center">Codigo</th>
                 <th scope="col" class="text-center">Nombre</th>
-                <th scope="col" class="text-center">tipo</th>
+                <th scope="col" class="text-center">Genero</th>
+                <th scope="col" class="text-center">NombreOficial</th>
+                <th scope="col" class="text-center">Numero Integrantes</th>
+                <th scope="col" class="text-center">Tipo</th>
                 <th scope="col" class="text-center">Acciones</th>
             </tr>
         </thead>
@@ -67,20 +80,23 @@ if($resultadoCliente and $resultadoCliente->num_rows > 0):
 
             <?php
             // Iterar sobre los registros que llegaron
-            foreach ($resultadoCliente as $fila):
+            foreach ($resultadoArtista as $fila):
             ?>
 
             <!-- Fila que se generará -->
             <tr>
                 <!-- Cada una de las columnas, con su valor correspondiente -->
-                <td class="text-center"><?= $fila["codigo"]; ?></td>
-                <td class="text-center"><?= $fila["nombre"]; ?></td>
-                <td class="text-center"><?= $fila["tipo"]; ?></td>
+                <td class="text-center"><?= $fila["CODIGO"]; ?></td>
+                <td class="text-center"><?= $fila["NOMBRE_ARTISTICO"]; ?></td>
+                <td class="text-center"><?= $fila["GENERO_MUSICAL"]; ?></td>
+                <td class="text-center"><?= $fila["NOMBRE_OFICIAL"]; ?></td>
+                <td class="text-center"><?= $fila["NUMERO_INTEGRANTES"]; ?></td>
+                <td class="text-center"><?= $fila["TIPO_ARTISTA"]; ?></td>
                 
                 <!-- Botón de eliminar. Debe de incluir la CP de la entidad para identificarla -->
                 <td class="text-center">
-                    <form action="cliente_delete.php" method="post">
-                        <input hidden type="text" name="codigoEliminar" value="<?= $fila["codigo"]; ?>">
+                    <form action="artista_delete.php" method="post">
+                        <input hidden type="text" name="codigoEliminar" value="<?= $fila["CODIGO"]; ?>">
                         <button type="submit" class="btn btn-danger">Eliminar</button>
                     </form>
                 </td>

@@ -7,6 +7,6 @@ require('../config/conexion.php');
 $query = "SELECT * FROM artista";
 
 // Ejecutar la consulta
-$resultadoCliente = mysqli_query($conn, $query) or die(mysqli_error($conn));
+$resultadoArtista = mysqli_query($conn, $query) or die(mysqli_error($conn));
 
 mysqli_close($conn);
