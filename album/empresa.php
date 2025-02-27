@@ -3,12 +3,22 @@ include "../includes/header.php";
 ?>
 
 <!-- TÍTULO. Cambiarlo, pero dejar especificada la analogía -->
-<h1 class="mt-3">Entidad análoga a MECANICO (ALBUM)</h1>
+<h1 class="mt-3">Entidad análoga a EMPRESA (NOMBRE)</h1>
 
 <!-- FORMULARIO. Cambiar los campos de acuerdo a su trabajo -->
 <div class="formulario p-4 m-3 border rounded-3">
 
-    <form action="album_insert.php" method="post" class="form-group">
+    <form action="empresa_insert.php" method="post" class="form-group">
+
+        <div class="mb-3">
+            <label for="nit" class="form-label">Codigo</label>
+            <input type="number" class="form-control" id="nit" name="nit" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Título</label>
+            <input type="text" class="form-control" id="nombre" name="nombre" required>
+        </div>
 
         <!-- Consultar la lista de artistas y desplegarlos -->
         <div class="mb-3">
@@ -41,20 +51,14 @@ include "../includes/header.php";
         </div>
 
         <div class="mb-3">
-            <label for="nit" class="form-label">NIT</label>
-            <input type="number" class="form-control" id="nit" name="nit" required>
-        </div>
-
-        <div class="mb-3">
-            <label for="nombre" class="form-label">Nombre</label>
-            <input type="text" class="form-control" id="nombre" name="nombre" required>
-        </div>
-
-        <div class="mb-3">
-            <label for="presupuesto" class="form-label">Presupuesto</label>
+            <label for="presupuesto" class="form-label">Año de lanzamiento</label>
             <input type="number" class="form-control" id="presupuesto" name="presupuesto" required>
         </div>
-        
+
+        <div class="mb-3">
+            <label for="creditos" class="form-label">Creditos(URL)</label>
+            <input type="text" class="form-control" id="creditos" name="creditos" required>
+        </div>
         
 
         <button type="submit" class="btn btn-primary">Agregar</button>
@@ -65,7 +69,7 @@ include "../includes/header.php";
 
 <?php
 // Importar el código del otro archivo
-require("album_select.php");
+require("empresa_select.php");
 
 // Verificar si llegan datos
 if($resultadoEmpresa and $resultadoEmpresa->num_rows > 0):
@@ -79,10 +83,11 @@ if($resultadoEmpresa and $resultadoEmpresa->num_rows > 0):
         <!-- Títulos de la tabla, cambiarlos -->
         <thead class="table-dark">
             <tr>
-                <th scope="col" class="text-center">NIT</th>
-                <th scope="col" class="text-center">Nombre</th>
-                <th scope="col" class="text-center">Presupuesto</th>
-                <th scope="col" class="text-center">Cliente</th>
+                <th scope="col" class="text-center">Codigo</th>
+                <th scope="col" class="text-center">Titulo</th>
+                <th scope="col" class="text-center">Artista</th>
+                <th scope="col" class="text-center">Año de lanzamiento</th>
+                <th scope="col" class="text-center">Creditos</th>
                 <th scope="col" class="text-center">Acciones</th>
             </tr>
         </thead>
@@ -97,15 +102,16 @@ if($resultadoEmpresa and $resultadoEmpresa->num_rows > 0):
             <!-- Fila que se generará -->
             <tr>
                 <!-- Cada una de las columnas, con su valor correspondiente -->
-                <td class="text-center"><?= $fila["nit"]; ?></td>
-                <td class="text-center"><?= $fila["nombre"]; ?></td>
-                <td class="text-center">$<?= $fila["presupuesto"]; ?></td>
-                <td class="text-center">C.C. <?= $fila["cliente"]; ?></td>
+                <td class="text-center"><?= $fila["CODIGO"]; ?></td>
+                <td class="text-center"><?= $fila["TITULO"]; ?></td>
+                <td class="text-center"><?= $fila["NOMBRE_ARTISTICO"]; ?></td>
+                <td class="text-center"><?= $fila["ANO_LANZAMIENTO"]; ?></td>
+                <td class="text-center"><?= $fila["CREDITOS"]; ?></td>
                 
                 <!-- Botón de eliminar. Debe de incluir la CP de la entidad para identificarla -->
                 <td class="text-center">
-                    <form action="album_delete.php" method="post">
-                        <input hidden type="text" name="nitEliminar" value="<?= $fila["nit"]; ?>">
+                    <form action="empresa_delete.php" method="post">
+                        <input hidden type="text" name="nitEliminar" value="<?= $fila["CODIGO"]; ?>">
                         <button type="submit" class="btn btn-danger">Eliminar</button>
                     </form>
                 </td>
