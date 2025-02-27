@@ -29,7 +29,7 @@ include "../includes/header.php";
             <label for="tipo" class="form-label">Tipo</label>
             <select class="form-control" id="tipo" name="tipo" required>
                 <option value="Solista" selected>Solista</option>
-                <option value="Banda" >Banda</option>
+                <option value="Grupo" >Grupo</option>
             </select>
 
         <div class="mb-3">

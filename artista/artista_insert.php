@@ -21,9 +21,9 @@ if ($tipo == "Solista") {
 		$query = "INSERT INTO `artista` (`codigo`, `nombre_artistico`, `genero_musical`, `tipo_artista`, `numero_integrantes`, `nombre_oficial`) 
           VALUES ('$codigo', '$nombre', '$genero', '$tipo', NULL, '$nombre_oficial')";
 	}
-} elseif ($tipo == "Banda") { 
+} elseif ($tipo == "Grupo") { 
     if (empty($numero_integrantes)) {
-		echo "Error: Un BANDA necesita numero de integrantes.";
+		echo "Error: Un Grupo necesita numero de integrantes.";
 	} else{
 		$query = "INSERT INTO `artista` (`codigo`, `nombre_artistico`, `genero_musical`, `tipo_artista`, `numero_integrantes`, `nombre_oficial`) 
           VALUES ('$codigo', '$nombre', '$genero', '$tipo', '$numero_integrantes', NULL)";
