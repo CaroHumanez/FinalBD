@@ -3,12 +3,42 @@ include "../includes/header.php";
 ?>
 
 <!-- TÍTULO. Cambiarlo, pero dejar especificada la analogía -->
-<h1 class="mt-3">Entidad análoga a EMPRESA (NOMBRE)</h1>
+<h1 class="mt-3">Entidad análoga a MECANICO (ALBUM)</h1>
 
 <!-- FORMULARIO. Cambiar los campos de acuerdo a su trabajo -->
 <div class="formulario p-4 m-3 border rounded-3">
 
-    <form action="empresa_insert.php" method="post" class="form-group">
+    <form action="album_insert.php" method="post" class="form-group">
+
+        <!-- Consultar la lista de artistas y desplegarlos -->
+        <div class="mb-3">
+            <label for="artista" class="form-label">Artista</label>
+            <select name="artista" id="artista" class="form-select">
+                
+                <!-- Option por defecto -->
+                <option value="" selected disabled hidden></option>
+
+                <?php
+                // Importar el código del otro archivo
+                require("../artista/cliente_select.php");
+                
+                // Verificar si llegan datos
+                if($resultadoCliente):
+                    
+                    // Iterar sobre los registros que llegaron
+                    foreach ($resultadoCliente as $fila):
+                ?>
+
+                <!-- Opción que se genera -->
+                <option value="<?= $fila["CODIGO"]; ?>"><?= $fila["NOMBRE_ARTISTICO"]; ?></option>
+
+                <?php
+                        // Cerrar los estructuras de control
+                    endforeach;
+                endif;
+                ?>
+            </select>
+        </div>
 
         <div class="mb-3">
             <label for="nit" class="form-label">NIT</label>
@@ -25,35 +55,7 @@ include "../includes/header.php";
             <input type="number" class="form-control" id="presupuesto" name="presupuesto" required>
         </div>
         
-        <!-- Consultar la lista de clientes y desplegarlos -->
-        <div class="mb-3">
-            <label for="cliente" class="form-label">Cliente</label>
-            <select name="cliente" id="cliente" class="form-select">
-                
-                <!-- Option por defecto -->
-                <option value="" selected disabled hidden></option>
-
-                <?php
-                // Importar el código del otro archivo
-                require("../cliente/cliente_select.php");
-                
-                // Verificar si llegan datos
-                if($resultadoCliente):
-                    
-                    // Iterar sobre los registros que llegaron
-                    foreach ($resultadoCliente as $fila):
-                ?>
-
-                <!-- Opción que se genera -->
-                <option value="<?= $fila["cedula"]; ?>"><?= $fila["nombre"]; ?> - C.C. <?= $fila["cedula"]; ?></option>
-
-                <?php
-                        // Cerrar los estructuras de control
-                    endforeach;
-                endif;
-                ?>
-            </select>
-        </div>
+        
 
         <button type="submit" class="btn btn-primary">Agregar</button>
 
@@ -63,7 +65,7 @@ include "../includes/header.php";
 
 <?php
 // Importar el código del otro archivo
-require("empresa_select.php");
+require("album_select.php");
 
 // Verificar si llegan datos
 if($resultadoEmpresa and $resultadoEmpresa->num_rows > 0):
@@ -102,7 +104,7 @@ if($resultadoEmpresa and $resultadoEmpresa->num_rows > 0):
                 
                 <!-- Botón de eliminar. Debe de incluir la CP de la entidad para identificarla -->
                 <td class="text-center">
-                    <form action="empresa_delete.php" method="post">
+                    <form action="album_delete.php" method="post">
                         <input hidden type="text" name="nitEliminar" value="<?= $fila["nit"]; ?>">
                         <button type="submit" class="btn btn-danger">Eliminar</button>
                     </form>
