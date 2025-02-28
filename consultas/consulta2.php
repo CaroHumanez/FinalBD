@@ -6,11 +6,13 @@ include "../includes/header.php";
 <h1 class="mt-3">Consulta 2</h1>
 
 <p class="mt-3">
-    Sea sumavalor la suma de los valores de todos los proyectos asociados con un cliente.
-    El segundo botón debe mostrar el código y el valor de cada uno de los proyectos 
-    que cumple todas las siguientes condiciones: tiene un valor mayor que el 
-    presupuesto de la empresa que lo revisa y además el cliente que lo revisa es el 
-    gerente de la empresa que lo revisa.
+    Mostrar el código y el nombre de los talleres de los dos talleres que tienen la mayor cantidad<br>
+    de reparaciones (en caso de empates,usted decide cómo proceder).<br><br>
+
+    Equivalente a:<br><br>
+
+    Mostrar el código y el nombre artistico de los dos artistas que tiene la mayor cantidad de albumes<br>
+    eb caso de empates, se decide por el nombre alfabeticamente .
 </p>
 
 <?php
@@ -18,7 +20,12 @@ include "../includes/header.php";
 require('../config/conexion.php');
 
 // Query SQL a la BD -> Crearla acá (No está completada, cambiarla a su contexto y a su analogía)
-$query = "SELECT codigo, valor FROM proyecto";
+$query = "SELECT ARTISTA.NOMBRE_ARTISTICO, COUNT(ALBUM.CODIGO) AS TOTAL_ALBUMES
+            FROM ALBUM
+            JOIN ARTISTA ON ALBUM.CODIGO_ARTISTA = ARTISTA.CODIGO
+            GROUP BY ARTISTA.CODIGO, ARTISTA.NOMBRE_ARTISTICO
+            ORDER BY TOTAL_ALBUMES DESC
+            LIMIT 2;";
 
 // Ejecutar la consulta
 $resultadoC2 = mysqli_query($conn, $query) or die(mysqli_error($conn));
