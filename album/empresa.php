@@ -30,13 +30,13 @@ include "../includes/header.php";
 
                 <?php
                 // Importar el código del otro archivo
-                require("../artista/cliente_select.php");
+                require("../artista/artista_select.php");
                 
                 // Verificar si llegan datos
-                if($resultadoCliente):
+                if($resultadoArtista):
                     
                     // Iterar sobre los registros que llegaron
-                    foreach ($resultadoCliente as $fila):
+                    foreach ($resultadoArtista as $fila):
                 ?>
 
                 <!-- Opción que se genera -->

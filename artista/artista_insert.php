@@ -14,20 +14,12 @@ $nombre_oficial = $_POST["nombre_oficial"];
 $query = "";
 
 if ($tipo == "Solista") { 
-    if (empty($nombre_oficial)) {
-        echo "Error: Un solista necesita un nombre real.";
-    }
-	else {
-		$query = "INSERT INTO `artista` (`codigo`, `nombre_artistico`, `genero_musical`, `tipo_artista`, `numero_integrantes`, `nombre_oficial`) 
+    $query = "INSERT INTO `artista` (`codigo`, `nombre_artistico`, `genero_musical`, `tipo_artista`, `numero_integrantes`, `nombre_oficial`) 
           VALUES ('$codigo', '$nombre', '$genero', '$tipo', NULL, '$nombre_oficial')";
-	}
+	
 } elseif ($tipo == "Grupo") { 
-    if (empty($numero_integrantes)) {
-		echo "Error: Un Grupo necesita numero de integrantes.";
-	} else{
 		$query = "INSERT INTO `artista` (`codigo`, `nombre_artistico`, `genero_musical`, `tipo_artista`, `numero_integrantes`, `nombre_oficial`) 
           VALUES ('$codigo', '$nombre', '$genero', '$tipo', '$numero_integrantes', NULL)";
-	}
 }
 
 if ($query){
