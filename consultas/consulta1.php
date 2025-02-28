@@ -13,7 +13,7 @@ include "../includes/header.php";
 
         Mostrar los datos de las tres canciones de mayor duracion con 
         los datos de los albumes asociados a cada una de las canciones. En caso de empate<br> 
-        por la duracion se organiza por la fecha de forma asendente.
+        por la duracion se organiza por la fecha de forma ascendente.
 </p>
 
 <?php

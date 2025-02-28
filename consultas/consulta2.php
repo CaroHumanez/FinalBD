@@ -11,8 +11,8 @@ include "../includes/header.php";
 
     Equivalente a:<br><br>
 
-    Mostrar el código y el nombre artistico de los dos artistas que tiene la mayor cantidad de albumes<br>
-    eb caso de empates, se decide por el nombre alfabeticamente .
+    Mostrar el código y el nombre artistico de los dos artistas que tiene la mayor cantidad de canciones<br>
+    en caso de empates, se decide por el nombre alfabeticamente .
 </p>
 
 <?php
@@ -20,12 +20,14 @@ include "../includes/header.php";
 require('../config/conexion.php');
 
 // Query SQL a la BD -> Crearla acá (No está completada, cambiarla a su contexto y a su analogía)
-$query = "SELECT ARTISTA.NOMBRE_ARTISTICO, COUNT(ALBUM.CODIGO) AS TOTAL_ALBUMES
-            FROM ALBUM
-            JOIN ARTISTA ON ALBUM.CODIGO_ARTISTA = ARTISTA.CODIGO
-            GROUP BY ARTISTA.CODIGO, ARTISTA.NOMBRE_ARTISTICO
-            ORDER BY TOTAL_ALBUMES DESC
-            LIMIT 2;";
+$query = "SELECT ARTISTA.CODIGO,ARTISTA.NOMBRE_ARTISTICO, COUNT(CANCION.CODIGO) AS TOTAL_CANCIONES FROM ARTISTA
+JOIN 
+ALBUM ON ARTISTA.CODIGO = ALBUM.CODIGO_ARTISTA
+JOIN
+CANCION ON CANCION.CODIGO_ALBUM = ALBUM.CODIGO
+GROUP BY ARTISTA.CODIGO
+ORDER BY TOTAL_CANCIONES DESC, ARTISTA.NOMBRE_ARTISTICO ASC
+LIMIT 2;";
 
 // Ejecutar la consulta
 $resultadoC2 = mysqli_query($conn, $query) or die(mysqli_error($conn));
@@ -46,8 +48,8 @@ if($resultadoC2 and $resultadoC2->num_rows > 0):
         <!-- Títulos de la tabla, cambiarlos -->
         <thead class="table-dark">
             <tr>
-                <th scope="col" class="text-center">Cédula</th>
-                <th scope="col" class="text-center">Nombre</th>
+                <th scope="col" class="text-center">Codigo</th>
+                <th scope="col" class="text-center">Nombre Artistico</th>
             </tr>
         </thead>
 
@@ -61,8 +63,8 @@ if($resultadoC2 and $resultadoC2->num_rows > 0):
             <!-- Fila que se generará -->
             <tr>
                 <!-- Cada una de las columnas, con su valor correspondiente -->
-                <td class="text-center"><?= $fila["cedula"]; ?></td>
-                <td class="text-center"><?= $fila["nombre"]; ?></td>
+                <td class="text-center"><?= $fila["CODIGO"]; ?></td>
+                <td class="text-center"><?= $fila["NOMBRE_ARTISTICO"]; ?></td>
             </tr>
 
             <?php
