@@ -76,7 +76,7 @@ if($resultadoC1 and $resultadoC1->num_rows > 0):
                 <td class="text-center"><?= $fila["CODIGO"]; ?></td>
                 <td class="text-center"><?= $fila["TITULO"]; ?></td>
                 <td class="text-center"><?= date("d/m/Y", strtotime($fila["FECHA_LANZAMIENTO"])); ?></td>
-                <td class="text-center table-danger"><?= $fila["DURACION"]; ?> min</td>
+                <td class="text-center table-danger"><?= $fila["DURACION"]; ?> seg</td>
                 <td class="text-center"><?= $fila["ARTISTA"]; ?></td>
                 <td class="text-center"><?= $fila["CODIGO_ALBUM"]; ?></td>
                 <td class="text-center"><?= $fila["NOMBRE_ALBUM"]; ?></td>

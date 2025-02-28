@@ -136,7 +136,7 @@ if($resultadoProyecto and $resultadoProyecto->num_rows > 0):
                 <td class="text-center"><?= $fila["TITULO"]; ?></td>
                 <td class="text-center"><?= $fila["CODIGO_ALBUM"]; ?>-<?= $fila["NOMBRE_ALBUM"]; ?> </td>
                 <td class="text-center"><?= date("d/m/Y", strtotime($fila["FECHA_LANZAMIENTO"])); ?></td>
-                <td class="text-center"><?= $fila["DURACION"]; ?> minutos</td>
+                <td class="text-center"><?= $fila["DURACION"]; ?> segundos</td>
                 <td class="text-center"><?= $fila["CODIGO_INSPIRACION"]; ?></td>
                 
                 <!-- Botón de eliminar. Debe de incluir la CP de la entidad para identificarla -->
