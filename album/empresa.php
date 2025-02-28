@@ -3,7 +3,7 @@ include "../includes/header.php";
 ?>
 
 <!-- TÍTULO. Cambiarlo, pero dejar especificada la analogía -->
-<h1 class="mt-3">Entidad análoga a MECANICO (ALBUM)</h1>
+<h1 class="mt-3">Entidad análoga a MECÁNICO (ÁLBUM)</h1>
 
 <!-- FORMULARIO. Cambiar los campos de acuerdo a su trabajo -->
 <div class="formulario p-4 m-3 border rounded-3">
@@ -11,7 +11,7 @@ include "../includes/header.php";
     <form action="empresa_insert.php" method="post" class="form-group">
 
         <div class="mb-3">
-            <label for="nit" class="form-label">Codigo</label>
+            <label for="nit" class="form-label">Código</label>
             <input type="number" class="form-control" id="nit" name="nit" required>
         </div>
 
@@ -56,7 +56,7 @@ include "../includes/header.php";
         </div>
 
         <div class="mb-3">
-            <label for="creditos" class="form-label">Creditos(URL)</label>
+            <label for="creditos" class="form-label">Créditos(URL)</label>
             <input type="text" class="form-control" id="creditos" name="creditos" required>
         </div>
         
@@ -83,11 +83,11 @@ if($resultadoEmpresa and $resultadoEmpresa->num_rows > 0):
         <!-- Títulos de la tabla, cambiarlos -->
         <thead class="table-dark">
             <tr>
-                <th scope="col" class="text-center">Codigo</th>
-                <th scope="col" class="text-center">Titulo</th>
+                <th scope="col" class="text-center">Código</th>
+                <th scope="col" class="text-center">Título</th>
                 <th scope="col" class="text-center">Artista</th>
                 <th scope="col" class="text-center">Año de lanzamiento</th>
-                <th scope="col" class="text-center">Creditos</th>
+                <th scope="col" class="text-center">Créditos</th>
                 <th scope="col" class="text-center">Acciones</th>
             </tr>
         </thead>

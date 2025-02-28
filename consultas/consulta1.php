@@ -6,19 +6,32 @@ include "../includes/header.php";
 <h1 class="mt-3">Consulta 1</h1>
 
 <p class="mt-3">
-    Sea sumavalor la suma de los valores de todos los proyectos asociados con un cliente.
-    El primer botón debe mostrar la cédula y el nombre de cada uno de los clientes 
-    que cumple todas las siguientes condiciones: es gerente, tiene sumavalor > 1000,
-    ha revisado al menos 3 proyectos y la empresa que gerencia no ha revisado ni un
-    solo proyecto.
+        Mostrar los datos de las tres reparaciones de mayor valor junto con 
+        los datos de los mecánicos asociados a cada una de estas reparaciones.<br><br>
+
+        Equivalente a:<br><br>
+
+        Mostrar los datos de las tres canciones de mayor duracion con 
+        los datos de los albumes asociados a cada una de las canciones. En caso de empate<br> 
+        por la duracion se organiza por la fecha de forma asendente.
 </p>
 
 <?php
 // Crear conexión con la BD
 require('../config/conexion.php');
 
+
 // Query SQL a la BD -> Crearla acá (No está completada, cambiarla a su contexto y a su analogía)
-$query = "SELECT cedula, nombre FROM cliente";
+$query = "SELECT 
+        CANCION.*, 
+        ALBUM.*,
+        ALBUM.TITULO AS NOMBRE_ALBUM, 
+        ARTISTA.NOMBRE_ARTISTICO AS ARTISTA
+        FROM CANCION
+        JOIN ALBUM ON CANCION.CODIGO_ALBUM = ALBUM.CODIGO
+        JOIN ARTISTA ON ALBUM.CODIGO_ARTISTA = ARTISTA.CODIGO
+        ORDER BY CANCION.DURACION DESC, CANCION.FECHA_LANZAMIENTO ASC
+        LIMIT 3;";
 
 // Ejecutar la consulta
 $resultadoC1 = mysqli_query($conn, $query) or die(mysqli_error($conn));
@@ -39,8 +52,14 @@ if($resultadoC1 and $resultadoC1->num_rows > 0):
         <!-- Títulos de la tabla, cambiarlos -->
         <thead class="table-dark">
             <tr>
-                <th scope="col" class="text-center">Cédula</th>
-                <th scope="col" class="text-center">Nombre</th>
+                <th scope="col" class="text-center">Cod canción</th>
+                <th scope="col" class="text-center">Canción</th>
+                <th scope="col" class="text-center">Fecha<br>Lanzamiento</th>
+                <th scope="col" class="text-center">Duración</th>
+                <th scope="col" class="text-center">Artista</th>
+                <th scope="col" class="text-center">Cod Album</th>
+                <th scope="col" class="text-center">Álbum</th>
+                <th scope="col" class="text-center">Créditos</th>
             </tr>
         </thead>
 
@@ -54,8 +73,14 @@ if($resultadoC1 and $resultadoC1->num_rows > 0):
             <!-- Fila que se generará -->
             <tr>
                 <!-- Cada una de las columnas, con su valor correspondiente -->
-                <td class="text-center"><?= $fila["cedula"]; ?></td>
-                <td class="text-center"><?= $fila["nombre"]; ?></td>
+                <td class="text-center"><?= $fila["CODIGO"]; ?></td>
+                <td class="text-center"><?= $fila["TITULO"]; ?></td>
+                <td class="text-center"><?= date("d/m/Y", strtotime($fila["FECHA_LANZAMIENTO"])); ?></td>
+                <td class="text-center table-danger"><?= $fila["DURACION"]; ?> min</td>
+                <td class="text-center"><?= $fila["ARTISTA"]; ?></td>
+                <td class="text-center"><?= $fila["CODIGO_ALBUM"]; ?></td>
+                <td class="text-center"><?= $fila["NOMBRE_ALBUM"]; ?></td>
+                <td class="text-center"><?= $fila["CREDITOS"]; ?></td>
             </tr>
 
             <?php

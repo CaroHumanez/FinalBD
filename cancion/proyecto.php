@@ -22,7 +22,7 @@ include "../includes/header.php";
 
         <!-- Consultar la lista de albumes y desplegarlos -->
         <div class="mb-3">
-            <label for="album" class="form-label">Album</label>
+            <label for="album" class="form-label">Álbum</label>
             <select name="album" id="album" class="form-select">
                 
                 <!-- Option por defecto -->
@@ -66,7 +66,7 @@ include "../includes/header.php";
             <select name="inspiracion" id="inspiracion" class="form-select">
                 
                 <!-- Option por defecto -->
-                <option value="131313" selected disabled hidden></option>
+                <option value="NULL" selected disabled hidden></option>
 
                 <?php
                 // Importar el código del otro archivo
@@ -113,11 +113,11 @@ if($resultadoProyecto and $resultadoProyecto->num_rows > 0):
         <thead class="table-dark">
             <tr>
                 <th scope="col" class="text-center">Código</th>
-                <th scope="col" class="text-center">Titulo</th>
-                <th scope="col" class="text-center">Album</th>
+                <th scope="col" class="text-center">Título</th>
+                <th scope="col" class="text-center">Álbum</th>
                 <th scope="col" class="text-center">Fecha de lanzamiento</th>
                 <th scope="col" class="text-center">Duracion</th>
-                <th scope="col" class="text-center">Inspiracion</th>
+                <th scope="col" class="text-center">Inspiración</th>
                 <th scope="col" class="text-center">Acciones</th>
             </tr>
         </thead>
@@ -134,8 +134,8 @@ if($resultadoProyecto and $resultadoProyecto->num_rows > 0):
                 <!-- Cada una de las columnas, con su valor correspondiente -->
                 <td class="text-center"><?= $fila["CODIGO"]; ?></td>
                 <td class="text-center"><?= $fila["TITULO"]; ?></td>
-                <td class="text-center"><?= $fila["CODIGO_ALBUM"]; ?></td>
-                <td class="text-center"><?= $fila["FECHA_LANZAMIENTO"]; ?></td>
+                <td class="text-center"><?= $fila["CODIGO_ALBUM"]; ?>-<?= $fila["NOMBRE_ALBUM"]; ?> </td>
+                <td class="text-center"><?= date("d/m/Y", strtotime($fila["FECHA_LANZAMIENTO"])); ?></td>
                 <td class="text-center"><?= $fila["DURACION"]; ?> minutos</td>
                 <td class="text-center"><?= $fila["CODIGO_INSPIRACION"]; ?></td>
                 
