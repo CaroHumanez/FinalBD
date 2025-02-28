@@ -12,9 +12,9 @@ include "../includes/header.php";
 
     Equivalente a: <br><br>
 
-    El código de un artista y un rango de fechas (es decir, dos fechas f1 y f2
+    El código de un album y un rango de fechas (es decir, dos fechas f1 y f2
     (cada fecha con día, mes y año) y f2 >= f1).<br> Se debe mostrar el valor total de las
-    duraciones de las canciones correspondientes a ese artista durante ese rango de fechas.<br><br>
+    duraciones de las canciones correspondientes a ese album durante ese rango de fechas.<br><br>
 </p>
 
 <!-- FORMULARIO -->
@@ -22,8 +22,8 @@ include "../includes/header.php";
     <form action="busqueda1.php" method="post" class="form-group">
 
         <div class="mb-3">
-            <label for="codigo_artista" class="form-label">Código de Artista</label>
-            <input type="number" class="form-control" id="codigo_artista" name="codigo_artista" required>
+            <label for="codigo_album" class="form-label">Código de album</label>
+            <input type="number" class="form-control" id="codigo_album" name="codigo_album" required>
         </div> 
 
         <div class="mb-3">
@@ -48,17 +48,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'):
 
     $fecha1 = $_POST["fecha1"];
     $fecha2 = $_POST["fecha2"];
-    $codigo_artista = $_POST["codigo_artista"];
+    $codigo_album = $_POST["codigo_album"];
 
     // Query SQL adaptada a la analogía
-    $query = "SELECT ARTISTA.CODIGO, ARTISTA.NOMBRE_ARTISTICO, SUM(CANCION.DURACION) AS DURACION_CANCIONES 
-              FROM ARTISTA
-              JOIN ALBUM ON ARTISTA.CODIGO = ALBUM.CODIGO_ARTISTA
-              JOIN CANCION ON ALBUM.CODIGO = CANCION.CODIGO_ALBUM
-              WHERE CANCION.FECHA_LANZAMIENTO >= '$fecha1' AND
-                    CANCION.FECHA_LANZAMIENTO <= '$fecha2' AND 
-                    ARTISTA.CODIGO = '$codigo_artista'
-              GROUP BY ARTISTA.CODIGO;";
+    $query = "SELECT ALBUM.CODIGO, ALBUM.TITULO, SUM(CANCION.DURACION) AS DURACION_CANCIONES FROM ALBUM
+                JOIN 
+                CANCION ON ALBUM.CODIGO = CANCION.CODIGO_ALBUM
+                WHERE CANCION.FECHA_LANZAMIENTO > '$fecha1' AND
+                        CANCION.FECHA_LANZAMIENTO < '$fecha2' AND
+                        ALBUM.CODIGO = '$codigo_album'
+                GROUP BY ALBUM.CODIGO
+                ;";
 
     // Ejecutar la consulta
     $resultadoB1 = mysqli_query($conn, $query) or die(mysqli_error($conn));
@@ -69,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'):
     if ($resultadoB1 && $resultadoB1->num_rows > 0):
         $fila = mysqli_fetch_assoc($resultadoB1);
         // Mostrar el resultado en formato de texto
-        echo "<p>El artista <strong>" . $fila["NOMBRE_ARTISTICO"] . "</strong> entre <strong>" . $fecha1 . "</strong> y <strong>" . $fecha2 . "</strong> el total de la duración de las canciones fue de <strong>" . $fila["DURACION_CANCIONES"] . "</strong> segundos.</p>";
+        echo "<p>Del album <strong>" . $fila["TITULO"] . "</strong> las canciones lanzadas entre <strong>" . $fecha1 . "</strong> y <strong>" . $fecha2 . "</strong> tienen una duracion en total de <strong>" . $fila["DURACION_CANCIONES"] . "</strong> segundos.</p>";
     else:
         ?>
         <div class="alert alert-danger text-center mt-5">
