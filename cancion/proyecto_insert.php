@@ -16,6 +16,7 @@ $inspiracion = isset($_POST["inspiracion"]) && $_POST["inspiracion"] !== "" ? $_
 // Query SQL a la BD. Si tienen que hacer comprobaciones, hacerlas acá (Generar una query diferente para casos especiales)
 $query = "INSERT INTO `cancion`(`CODIGO`,`TITULO`, `FECHA_LANZAMIENTO`, `DURACION`, `CODIGO_ALBUM`, `CODIGO_INSPIRACION`) VALUES ('$codigo', '$titulo','$fechalanzamiento', '$duracion', '$codigo_album'," . ($inspiracion === "NULL" ? "NULL" : "'$inspiracion'") . ")";
 
+//Se debe controlar que el año de la fecha de lanzamiento de la cancion sea mayor o igual al año de lanzamiento del album
 
 // Ejecutar consulta
 $result = mysqli_query($conn, $query) or die(mysqli_error($conn));

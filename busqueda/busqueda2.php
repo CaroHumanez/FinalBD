@@ -67,11 +67,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'):
         <!-- Títulos de la tabla, cambiarlos -->
         <thead class="table-dark">
             <tr>
-                <th scope="col" class="text-center">Codigo</th>
-                <th scope="col" class="text-center">Titulo</th>
+                <th scope="col" class="text-center">Código</th>
+                <th scope="col" class="text-center">Título</th>
                 <th scope="col" class="text-center">Fecha de lanzamiento</th>
-                <th scope="col" class="text-center">Duracion</th>
-                <th scope="col" class="text-center">Codigo del Album</th>
+                <th scope="col" class="text-center">Duración</th>
+                <th scope="col" class="text-center">Código del Album</th>
             </tr>
         </thead>
 
@@ -87,7 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'):
                 <!-- Cada una de las columnas, con su valor correspondiente -->
                 <td class="text-center"><?= $fila["CODIGO"]; ?></td>
                 <td class="text-center"><?= $fila["TITULO"]; ?></td>
-                <td class="text-center"><?= $fila["FECHA_LANZAMIENTO"]; ?></td>
+                <td class="text-center"><?= date("d/m/Y", strtotime($fila["FECHA_LANZAMIENTO"])); ?></td>
                 <td class="text-center"><?= $fila["DURACION"]; ?> segundos</td>
                 <td class="text-center"><?= $fila["CODIGO_ALBUM"]; ?></td>
             </tr>
