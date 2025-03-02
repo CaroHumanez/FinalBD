@@ -9,9 +9,10 @@ require('../config/conexion.php');
 $query = "SELECT ALBUM.CODIGO, ALBUM.TITULO, ALBUM.ANO_LANZAMIENTO, ALBUM.CREDITOS, ALBUM.CODIGO_ARTISTA,
                  ARTISTA.NOMBRE_ARTISTICO 
           FROM ALBUM
-          JOIN ARTISTA ON ALBUM.CODIGO_ARTISTA = ARTISTA.CODIGO";
+          JOIN ARTISTA ON ALBUM.CODIGO_ARTISTA = ARTISTA.CODIGO
+          ORDER BY ALBUM.CODIGO";
 
 // Ejecutar la consulta
-$resultadoEmpresa = mysqli_query($conn, $query) or die(mysqli_error($conn));
+$resultadoAlbum = mysqli_query($conn, $query) or die(mysqli_error($conn));
 
 mysqli_close($conn);

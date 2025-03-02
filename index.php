@@ -45,8 +45,8 @@
         <h2>Enlaces</h2>
         <ul>
             <li><a href="artista/artista.php" class="list-group-item list-group-item-action list-group-item-secondary">Entidad análoga a TALLER (ARTISTA)</a></li>
-            <li><a href="album/empresa.php" class="list-group-item list-group-item-action list-group-item-secondary">Entidad análoga a MECANICO (ALBUM)</a></li>
-            <li><a href="cancion/proyecto.php" class="list-group-item list-group-item-action list-group-item-secondary">Entidad análoga a REPARACION (CANCION)</a></li>
+            <li><a href="album/album.php" class="list-group-item list-group-item-action list-group-item-secondary">Entidad análoga a MECANICO (ALBUM)</a></li>
+            <li><a href="cancion/cancion.php" class="list-group-item list-group-item-action list-group-item-secondary">Entidad análoga a REPARACION (CANCION)</a></li>
             <li><a href="consultas/consulta1.php" class="list-group-item list-group-item-action list-group-item-secondary">Consulta 1</a></li>
             <li><a href="consultas/consulta2.php" class="list-group-item list-group-item-action list-group-item-secondary">Consulta 2</a></li>
             <li><a href="busqueda/busqueda1.php" class="list-group-item list-group-item-action list-group-item-secondary">Búsqueda 1</a></li>

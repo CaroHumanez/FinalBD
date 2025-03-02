@@ -13,9 +13,10 @@ $query = "SELECT
     CANCION.CODIGO_INSPIRACION,
     ALBUM.TITULO AS NOMBRE_ALBUM
         FROM CANCION
-        JOIN ALBUM ON CANCION.CODIGO_ALBUM = ALBUM.CODIGO;";
+        JOIN ALBUM ON CANCION.CODIGO_ALBUM = ALBUM.CODIGO
+        ORDER BY CANCION.CODIGO;";
 
 // Ejecutar la consulta
-$resultadoProyecto = mysqli_query($conn, $query) or die(mysqli_error($conn));
+$resultadoCancion = mysqli_query($conn, $query) or die(mysqli_error($conn));
 
 mysqli_close($conn);

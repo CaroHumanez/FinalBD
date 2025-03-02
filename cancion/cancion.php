@@ -8,7 +8,7 @@ include "../includes/header.php";
 <!-- FORMULARIO. Cambiar los campos de acuerdo a su trabajo -->
 <div class="formulario p-4 m-3 border rounded-3">
 
-    <form action="proyecto_insert.php" method="post" class="form-group">
+    <form action="cancion_insert.php" method="post" class="form-group">
 
         <div class="mb-3">
             <label for="codigo" class="form-label">Código</label>
@@ -30,13 +30,13 @@ include "../includes/header.php";
 
                 <?php
                 // Importar el código del otro archivo
-                require("../album/empresa_select.php");
+                require("../album/album_select.php");
                 
                 // Verificar si llegan datos
-                if($resultadoEmpresa):
+                if($resultadoAlbum):
                     
                     // Iterar sobre los registros que llegaron
-                    foreach ($resultadoEmpresa as $fila):
+                    foreach ($resultadoAlbum as $fila):
                 ?>
 
                 <!-- Opción que se genera -->
@@ -70,13 +70,13 @@ include "../includes/header.php";
 
                 <?php
                 // Importar el código del otro archivo
-                require("../cancion/proyecto_select.php");
+                require("../cancion/cancion_select.php");
                 
                 // Verificar si llegan datos
-                if($resultadoProyecto):
+                if($resultadoCancion):
                     
                     // Iterar sobre los registros que llegaron
-                    foreach ($resultadoProyecto as $fila):
+                    foreach ($resultadoCancion as $fila):
                 ?>
 
                 <!-- Opción que se genera -->
@@ -98,10 +98,10 @@ include "../includes/header.php";
 
 <?php
 // Importar el código del otro archivo
-require("proyecto_select.php");
+require("cancion_select.php");
             
 // Verificar si llegan datos
-if($resultadoProyecto and $resultadoProyecto->num_rows > 0):
+if($resultadoCancion and $resultadoCancion->num_rows > 0):
 ?>
 
 <!-- MOSTRAR LA TABLA. Cambiar las cabeceras -->
@@ -126,7 +126,7 @@ if($resultadoProyecto and $resultadoProyecto->num_rows > 0):
 
             <?php
             // Iterar sobre los registros que llegaron
-            foreach ($resultadoProyecto as $fila):
+            foreach ($resultadoCancion as $fila):
             ?>
 
             <!-- Fila que se generará -->
@@ -141,7 +141,7 @@ if($resultadoProyecto and $resultadoProyecto->num_rows > 0):
                 
                 <!-- Botón de eliminar. Debe de incluir la CP de la entidad para identificarla -->
                 <td class="text-center">
-                    <form action="proyecto_delete.php" method="post">
+                    <form action="cancion_delete.php" method="post">
                         <input hidden type="text" name="codigoEliminar" value="<?= $fila["CODIGO"]; ?>">
                         <button type="submit" class="btn btn-danger">Eliminar</button>
                     </form>

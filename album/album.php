@@ -8,11 +8,11 @@ include "../includes/header.php";
 <!-- FORMULARIO. Cambiar los campos de acuerdo a su trabajo -->
 <div class="formulario p-4 m-3 border rounded-3">
 
-    <form action="empresa_insert.php" method="post" class="form-group">
+    <form action="album_insert.php" method="post" class="form-group">
 
         <div class="mb-3">
-            <label for="nit" class="form-label">Código</label>
-            <input type="number" class="form-control" id="nit" name="nit" required>
+            <label for="codigo" class="form-label">Código</label>
+            <input type="number" class="form-control" id="codigo" name="codigo" required>
         </div>
 
         <div class="mb-3">
@@ -23,7 +23,7 @@ include "../includes/header.php";
         <!-- Consultar la lista de artistas y desplegarlos -->
         <div class="mb-3">
             <label for="artista" class="form-label">Artista</label>
-            <select name="artista" id="artista" class="form-select">
+            <select name="artista" id="artista" class="form-select" required>
                 
                 <!-- Option por defecto -->
                 <option value="" selected disabled hidden></option>
@@ -51,8 +51,8 @@ include "../includes/header.php";
         </div>
 
         <div class="mb-3">
-            <label for="presupuesto" class="form-label">Año de lanzamiento</label>
-            <input type="number" class="form-control" id="presupuesto" name="presupuesto" required>
+            <label for="anio" class="form-label">Año de lanzamiento</label>
+            <input type="number" class="form-control" id="anio" name="anio" required>
         </div>
 
         <div class="mb-3">
@@ -69,10 +69,10 @@ include "../includes/header.php";
 
 <?php
 // Importar el código del otro archivo
-require("empresa_select.php");
+require("album_select.php");
 
 // Verificar si llegan datos
-if($resultadoEmpresa and $resultadoEmpresa->num_rows > 0):
+if($resultadoAlbum and $resultadoAlbum->num_rows > 0):
 ?>
 
 <!-- MOSTRAR LA TABLA. Cambiar las cabeceras -->
@@ -96,7 +96,7 @@ if($resultadoEmpresa and $resultadoEmpresa->num_rows > 0):
 
             <?php
             // Iterar sobre los registros que llegaron
-            foreach ($resultadoEmpresa as $fila):
+            foreach ($resultadoAlbum as $fila):
             ?>
 
             <!-- Fila que se generará -->
@@ -110,8 +110,8 @@ if($resultadoEmpresa and $resultadoEmpresa->num_rows > 0):
                 
                 <!-- Botón de eliminar. Debe de incluir la CP de la entidad para identificarla -->
                 <td class="text-center">
-                    <form action="empresa_delete.php" method="post">
-                        <input hidden type="text" name="nitEliminar" value="<?= $fila["CODIGO"]; ?>">
+                    <form action="album_delete.php" method="post">
+                        <input hidden type="text" name="codigo" value="<?= $fila["CODIGO"]; ?>">
                         <button type="submit" class="btn btn-danger">Eliminar</button>
                     </form>
                 </td>
